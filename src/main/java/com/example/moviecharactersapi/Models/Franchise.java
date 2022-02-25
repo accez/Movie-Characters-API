@@ -1,9 +1,7 @@
 package com.example.moviecharactersapi.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Franchise {
@@ -15,6 +13,8 @@ public class Franchise {
     private String name;
     private String description;
 
+    @OneToMany(mappedBy = "franchise")
+    private List<Movie> movies;
 
     public Franchise() {
     }
@@ -49,6 +49,15 @@ public class Franchise {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     //endregion
 
     @Override

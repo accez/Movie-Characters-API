@@ -1,13 +1,13 @@
 package com.example.moviecharactersapi.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 
     private String title;
@@ -17,6 +17,13 @@ public class Movie {
     private String pictureUrl;
     private String trailerUrl;
 
+    @ManyToMany
+    @JoinTable(name = "role_list")
+    private List<MovieCharacter> movieCharacterList;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Franchise franchise;
 
     public Movie() {
     }
@@ -87,6 +94,23 @@ public class Movie {
     public void setTrailerUrl(String trailerUrl) {
         this.trailerUrl = trailerUrl;
     }
+
+    public List<MovieCharacter> getMovieCharacterList() {
+        return movieCharacterList;
+    }
+
+    public void setMovieCharacterList(List<MovieCharacter> movieCharacterList) {
+        this.movieCharacterList = movieCharacterList;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
+
     //endregion
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.moviecharactersapi.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="movie_character")
@@ -13,6 +14,11 @@ public class MovieCharacter {
     private String gender;
     private String picture;
 
+    @ManyToMany
+    @JoinTable(name = "role_list")
+    private List<Movie> movieList;
+
+
     public MovieCharacter() {
     }
 
@@ -23,6 +29,7 @@ public class MovieCharacter {
         this.gender = gender;
         this.picture = picture;
     }
+
     //region GettersAndSetters
     public int getId() {
         return id;
@@ -62,6 +69,14 @@ public class MovieCharacter {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;
+    }
+
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
     }
 
     //endregion
