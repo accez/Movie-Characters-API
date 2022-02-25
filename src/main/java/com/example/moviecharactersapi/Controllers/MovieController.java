@@ -20,10 +20,23 @@ public class MovieController {
        return repository.findAll();
     }
 
+
+    @GetMapping("/{id}")
+    public Movie getMovieById(@PathVariable int id){
+        return repository.findById(id).orElse(null);
+    }
+
+
     @PostMapping("/")
     public Movie addMovie(@RequestBody Movie movie){
         movie =  repository.save(movie);
         return movie;
+    }
+
+
+    @DeleteMapping("/{id}")
+    public void deleteMove(@PathVariable int id){
+        repository.deleteById(id);
     }
 
 }
