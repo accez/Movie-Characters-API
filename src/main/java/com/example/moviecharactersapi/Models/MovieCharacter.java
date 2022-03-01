@@ -14,8 +14,7 @@ public class MovieCharacter {
     private String gender;
     private String picture;
 
-    @ManyToMany
-    @JoinTable(name = "role_list")
+    @ManyToMany(mappedBy = "movieCharacterList",fetch = FetchType.LAZY)
     private List<Movie> movieList;
 
 
