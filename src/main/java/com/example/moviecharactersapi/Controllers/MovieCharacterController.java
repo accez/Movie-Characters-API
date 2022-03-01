@@ -1,6 +1,10 @@
 package com.example.moviecharactersapi.Controllers;
 
 import com.example.moviecharactersapi.Models.MovieCharacter;
+import com.example.moviecharactersapi.MovieCharactersApiApplication;
+import com.example.moviecharactersapi.Repositorys.MovieCharacterRepoistory;
+import com.example.moviecharactersapi.Service.MovieCharacterService;
+import com.example.moviecharactersapi.Service.MovieService;
 import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,52 +12,62 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/character")
 public class MovieCharacterController {
-    @Autowired
-    private MovieCharacterRepository movieCharacterRepository;
 
-    //POST
-    @PostMapping("/character/add")
-    public MovieCharacter createCharacter(@RequestBody MovieCharacter character){
-        character = movieCharacterRepository.save(character);
-        return character;
+
+    private MovieCharacterRepoistory repository;
+    private MovieCharacterService service;
+
+    public MovieCharacterController(MovieCharacterRepoistory repository, MovieCharacterService service) {
+        this.repository = repository;
+        this.service = service;
     }
 
-    //GET
-    @GetMapping("/character/all")
-    public List<MovieCharacter> getAllCharacters(){
-        return movieCharacterRepository.findAll();
+    // region CRUD
+
+    //Create
+    @PostMapping("/")
+    public MovieCharacter createCharacter(@RequestBody MovieCharacter character) {
+        return repository.save(character);
     }
 
-    @GetMapping("/character/{id}")
-    public MovieCharacter getACharacter(@PathVariable int id){
+    // Read
+    @GetMapping("/")
+    public List<MovieCharacter> getAllCharacters() {
+        return repository.findAll();
 
-        MovieCharacter movieCharacter = null;
+    }
+
+    @GetMapping("/{id}")
+    public MovieCharacter getCharacterById(@PathVariable int id) {
+      /*
+      MovieCharacter movieCharacter = null;
         if (movieCharacterRepository.existsById(id)){
             movieCharacter = movieCharacterRepository.findById(id).orElse(null);
         }
-        return movieCharacter;
+      */
+        return repository.findById(id).orElse(null);
     }
 
-    //PUT
-    @PutMapping("/character/{id}")
-    public MovieCharacter replaceAMovieCharacter(@RequestBody MovieCharacter newMovieCharacter, @PathVariable int id){
-        return movieCharacterRepository.findById(id).map(movieCharacter -> {
-            movieCharacter.setFullName(newMovieCharacter.getFullName());
-            movieCharacter.setAlias(newMovieCharacter.getAlias());
-            movieCharacter.setGender(newMovieCharacter.getGender());
-            movieCharacter.setPicture(newMovieCharacter.getPicture());
-            return movieCharacterRepository.save(movieCharacter);
-        }).orElseGet(() -> {
-            newMovieCharacter.setId(id);
-            return movieCharacterRepository.save(newMovieCharacter);
-        });
+    // Update
+    @PutMapping("/{id}")
+    public MovieCharacter updateCharacter(@PathVariable int id, @RequestBody MovieCharacter character) {
+        character.setId(id);
+        return repository.save(character);
     }
 
-    //Delete
-    @DeleteMapping("/character/{id}")
-    public void deleteMovieCharacter(@PathVariable int id){
-        movieCharacterRepository.deleteById(id);
+    @PatchMapping("/{id}")
+    public MovieCharacter partialUpdateCharacter(@PathVariable int id, @RequestBody MovieCharacter character) {
+        character.setId(id);
+        return service.partialUpdateMovieCharacter(character);
     }
+
+    // Delete
+    @DeleteMapping("/{id}")
+    public void deleteCharacter(@PathVariable int id){
+        repository.deleteById(id);
+    }
+    // endregion
 }
 
