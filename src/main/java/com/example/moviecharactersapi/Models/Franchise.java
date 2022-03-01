@@ -1,5 +1,7 @@
 package com.example.moviecharactersapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class Franchise {
     private String description;
 
     @OneToMany(mappedBy = "franchise")
+    @JsonIgnore
     private List<Movie> movies;
 
     public Franchise() {

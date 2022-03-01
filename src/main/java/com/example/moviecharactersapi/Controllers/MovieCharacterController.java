@@ -5,6 +5,7 @@ import com.example.moviecharactersapi.MovieCharactersApiApplication;
 import com.example.moviecharactersapi.Repositorys.MovieCharacterRepoistory;
 import com.example.moviecharactersapi.Service.MovieCharacterService;
 import com.example.moviecharactersapi.Service.MovieService;
+import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +36,17 @@ public class MovieCharacterController {
     @GetMapping("/")
     public List<MovieCharacter> getAllCharacters() {
         return repository.findAll();
+
     }
 
     @GetMapping("/{id}")
     public MovieCharacter getCharacterById(@PathVariable int id) {
+      /*
+      MovieCharacter movieCharacter = null;
+        if (movieCharacterRepository.existsById(id)){
+            movieCharacter = movieCharacterRepository.findById(id).orElse(null);
+        }
+      */
         return repository.findById(id).orElse(null);
     }
 
@@ -60,6 +68,6 @@ public class MovieCharacterController {
     public void deleteCharacter(@PathVariable int id){
         repository.deleteById(id);
     }
-
     // endregion
 }
+
