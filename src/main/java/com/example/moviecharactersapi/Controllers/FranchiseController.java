@@ -55,6 +55,12 @@ public class FranchiseController {
         return service.partialUpdate(franchise);
     }
 
+    // Delete
+    @DeleteMapping("/{id}")
+    public void deleteFranchise(@PathVariable int id){
+        repository.deleteById(id);
+    }
+
     // endregion
 
 
