@@ -1,12 +1,8 @@
 package com.example.moviecharactersapi.Controllers;
 
 import com.example.moviecharactersapi.Models.MovieCharacter;
-import com.example.moviecharactersapi.MovieCharactersApiApplication;
-import com.example.moviecharactersapi.Repositorys.MovieCharacterRepoistory;
 import com.example.moviecharactersapi.Service.MovieCharacterService;
-import com.example.moviecharactersapi.Service.MovieService;
 import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +12,10 @@ import java.util.List;
 public class MovieCharacterController {
 
 
-    private MovieCharacterRepoistory repository;
+    private MovieCharacterRepository repository;
     private MovieCharacterService service;
 
-    public MovieCharacterController(MovieCharacterRepoistory repository, MovieCharacterService service) {
+    public MovieCharacterController(MovieCharacterRepository repository, MovieCharacterService service) {
         this.repository = repository;
         this.service = service;
     }

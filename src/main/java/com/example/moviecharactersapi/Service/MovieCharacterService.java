@@ -1,16 +1,15 @@
 package com.example.moviecharactersapi.Service;
 
-import com.example.moviecharactersapi.Models.Movie;
 import com.example.moviecharactersapi.Models.MovieCharacter;
-import com.example.moviecharactersapi.Repositorys.MovieCharacterRepoistory;
+import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MovieCharacterService {
 
-    private MovieCharacterRepoistory repository;
+    private MovieCharacterRepository repository;
 
-    public MovieCharacterService(MovieCharacterRepoistory repository) {
+    public MovieCharacterService(MovieCharacterRepository repository) {
         this.repository = repository;
     }
 
