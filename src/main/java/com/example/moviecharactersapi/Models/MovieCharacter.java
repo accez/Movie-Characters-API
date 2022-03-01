@@ -31,7 +31,7 @@ public class MovieCharacter {
     }
 
     //region GettersAndSetters
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
