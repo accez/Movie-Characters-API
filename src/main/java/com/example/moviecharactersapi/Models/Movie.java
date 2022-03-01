@@ -17,12 +17,14 @@ public class Movie {
     private String pictureUrl;
     private String trailerUrl;
 
-    @ManyToMany
-    @JoinTable(name = "role_list")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "role_list",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "character_id"))
     private List<MovieCharacter> movieCharacterList;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
     public Movie() {
