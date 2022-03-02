@@ -1,7 +1,10 @@
 package com.example.moviecharactersapi.Models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,11 +12,10 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "movie_character")
+@Table
 public class MovieCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,4 +33,13 @@ public class MovieCharacter {
     @ManyToMany(mappedBy = "movieCharacterList", fetch = FetchType.LAZY)
     private List<Movie> movieList;
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "fullName = " + fullName + ", " +
+                "alias = " + alias + ", " +
+                "gender = " + gender + ", " +
+                "picture = " + picture + ")";
+    }
 }
