@@ -4,7 +4,6 @@ package com.example.moviecharactersapi.Controllers;
 import com.example.moviecharactersapi.Models.Movie;
 import com.example.moviecharactersapi.Repositorys.MovieRepository;
 import com.example.moviecharactersapi.Service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -31,7 +30,7 @@ public class MovieController {
     }
     // READ
     @GetMapping("/")
-    public Collection<Movie> getAllMOvies() {
+    public Collection<Movie> getAllMOMovies() {
         return repository.findAll();
     }
 
@@ -48,14 +47,14 @@ public class MovieController {
     }
 
     @PatchMapping("/{id}")
-    public Movie partialUpdateMove(@PathVariable int id, @RequestBody Movie movie){
+    public Movie partialUpdateMovie(@PathVariable int id, @RequestBody Movie movie){
         movie.setId(id);
         return service.partialUpdateMovie(movie);
     }
 
     // DELETE
     @DeleteMapping("/{id}")
-    public void deleteMove(@PathVariable int id) {
+    public void deleteMovie(@PathVariable int id) {
         repository.deleteById(id);
     }
 
