@@ -3,7 +3,9 @@ package com.example.moviecharactersapi.Service;
 
 import com.example.moviecharactersapi.Models.Franchise;
 import com.example.moviecharactersapi.Models.Movie;
+import com.example.moviecharactersapi.Models.MovieCharacter;
 import com.example.moviecharactersapi.Repositorys.FranchiseRepository;
+import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
 import com.example.moviecharactersapi.Repositorys.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,13 @@ public class FranchiseService {
 
     private FranchiseRepository repository;
     private MovieRepository movieRepository;
+    private MovieCharacterRepository characterRepository;
 
-    public FranchiseService(FranchiseRepository repository, MovieRepository movieRepository){
+    public FranchiseService(FranchiseRepository repository, MovieRepository movieRepository, MovieCharacterRepository characterRepository) {
         this.repository = repository;
         this.movieRepository = movieRepository;
+        this.characterRepository = characterRepository;
     }
-
 
     public Franchise partialUpdate(Franchise franchise){
 
@@ -88,4 +91,24 @@ public class FranchiseService {
         repository.delete(franchise);
 
     }
+
+    public List<MovieCharacter> getAllMovieCharactersInFranchise(int id){
+
+        Franchise franchise = repository.getById(id);
+
+        List<Movie> movieList = movieRepository.findAllByFranchise(franchise);
+
+        List<MovieCharacter> returnList = new ArrayList<>();
+
+        for (Movie movie: movieList) {
+            List<MovieCharacter> movieCharacterList = characterRepository.findAllByMovieListContaining(movie);
+            for (MovieCharacter character: movieCharacterList) {
+                if(!returnList.contains(character))
+                    returnList.add(character);
+            }
+
+        }
+        return returnList;
+    }
+
 }

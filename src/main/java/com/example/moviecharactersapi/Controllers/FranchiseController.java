@@ -2,6 +2,7 @@ package com.example.moviecharactersapi.Controllers;
 
 
 import com.example.moviecharactersapi.Models.Franchise;
+import com.example.moviecharactersapi.Models.MovieCharacter;
 import com.example.moviecharactersapi.Repositorys.FranchiseRepository;
 import com.example.moviecharactersapi.Service.FranchiseService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -80,5 +81,9 @@ public class FranchiseController {
         return service.partialUpdateMovieFranchiseList(id,movieIds);
     }
 
+    @GetMapping("/getCharacters/{id}")
+    public List<MovieCharacter> getCharactersInFranchise(@PathVariable int id){
+        return service.getAllMovieCharactersInFranchise(id);
+    }
 
 }
