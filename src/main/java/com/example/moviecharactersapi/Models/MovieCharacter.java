@@ -25,9 +25,7 @@ public class MovieCharacter {
 
     @JsonGetter("movieList")
     public List<String> getMoviesAsURI() {
-        return movieList.stream()
-                .map(movie -> String.format("/movie/%d", movie.getId()))
-                .collect(Collectors.toList());
+        return movieList.stream().map(movie -> String.format("/movie/%d", movie.getId())).collect(Collectors.toList());
     }
 
     @ManyToMany(mappedBy = "movieCharacterList", fetch = FetchType.LAZY)

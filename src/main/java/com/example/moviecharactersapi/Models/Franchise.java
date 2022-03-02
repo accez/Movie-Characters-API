@@ -12,16 +12,14 @@ public class Franchise {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String name;
     private String description;
 
     @JsonGetter("movies")
-    public List<String> moviesAsURIInFranchise(){
-        return movies.stream()
-                .map(movie -> String.format("/movie/%d", movie.getId()))
-                .collect(Collectors.toList());
+    public List<String> moviesAsURIInFranchise() {
+        return movies.stream().map(movie -> String.format("/movie/%d", movie.getId())).collect(Collectors.toList());
     }
+
     @OneToMany(mappedBy = "franchise")
     private List<Movie> movies;
 
@@ -71,10 +69,6 @@ public class Franchise {
 
     @Override
     public String toString() {
-        return "Franchise{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Franchise{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + '}';
     }
 }
