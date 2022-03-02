@@ -48,6 +48,21 @@ public class MovieService {
         return repository.save(movieFromDB);
     }
 
+    public Movie fullUpdateCharacterList(int movieId, Collection<Integer> charIds){
+        Movie movie = repository.getById(movieId);
+        List<MovieCharacter> characterCollection = new ArrayList<>();
+        for (Integer charId: charIds) {
+            Optional<MovieCharacter> characterOptional = characterRepository.findById(charId);
+            if(characterOptional.isPresent()){
+                MovieCharacter movieCharacter = characterOptional.get();
+                characterCollection.add(movieCharacter);
+                movieCharacter.getMovieList().add(movie);
+            }
+        }
+        movie.setMovieCharacterList(characterCollection);
+        return repository.save(movie);
+    }
+
     public Movie partialUpdateCharacterList(int movieId, Collection<Integer> charIds) {
         Movie movie = repository.getById(movieId);
         for (Integer charId : charIds) {
@@ -63,19 +78,5 @@ public class MovieService {
         return repository.save(movie);
     }
 
-    public Movie fullUpdateCharacterList(int movieId, Collection<Integer> charIds){
-        Movie movie = repository.getById(movieId);
-        List<MovieCharacter> characterCollection = new ArrayList<>();
-        for (Integer charId: charIds) {
-            Optional<MovieCharacter> characterOptional = characterRepository.findById(charId);
-            if(characterOptional.isPresent()){
-                MovieCharacter movieCharacter = characterOptional.get();
-                characterCollection.add(movieCharacter);
-                movieCharacter.getMovieList().add(movie);
-            }
-        }
-        movie.setMovieCharacterList(characterCollection);
-        return repository.save(movie);
-    }
 
 }
