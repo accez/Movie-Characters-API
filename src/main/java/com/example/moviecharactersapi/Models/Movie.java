@@ -1,5 +1,8 @@
 package com.example.moviecharactersapi.Models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class Movie {
     @JoinTable(name = "role_list",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "character_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<MovieCharacter> movieCharacterList;
 
     @ManyToOne

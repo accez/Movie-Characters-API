@@ -59,7 +59,7 @@ public class FranchiseController {
     // Delete
     @DeleteMapping("/{id}")
     public void deleteFranchise(@PathVariable int id){
-        repository.deleteById(id);
+        service.removeFranchise(id);
     }
 
     // endregion

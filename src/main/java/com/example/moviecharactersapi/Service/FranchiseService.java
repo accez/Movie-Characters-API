@@ -39,7 +39,6 @@ public class FranchiseService {
         return repository.save(franchiseFromDB);
     }
 
-
     public Franchise fullUpdateMovieFranchiseList(int franchiseId, List<Integer> movieIds){
         Franchise franchise = repository.getById(franchiseId);
         List<Movie> currentMovieList = movieRepository.findAllByFranchise(franchise);
@@ -81,4 +80,12 @@ public class FranchiseService {
         return repository.save(franchise);
     }
 
+    public void removeFranchise(int id){
+        Franchise franchise = repository.getById(id);
+        List<Movie> movieList = movieRepository.findAllByFranchise(franchise);
+        movieList.forEach(movie -> movie.setFranchise(null));
+        movieRepository.saveAll(movieList);
+        repository.delete(franchise);
+
+    }
 }
