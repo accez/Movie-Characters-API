@@ -1,5 +1,9 @@
 package com.example.moviecharactersapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +35,7 @@ public class MovieCharacter {
     }
 
     @ManyToMany(mappedBy = "movieCharacterList", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Movie> movieList;
 
     @Override

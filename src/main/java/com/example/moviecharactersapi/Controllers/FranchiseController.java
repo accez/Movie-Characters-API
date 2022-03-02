@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/franchise")
@@ -63,10 +64,21 @@ public class FranchiseController {
     @Operation(summary = "Delete a franchise")
     @DeleteMapping("/{id}")
     public void deleteFranchise(@PathVariable int id){
-        repository.deleteById(id);
+        service.removeFranchise(id);
     }
 
     // endregion
+
+
+    @PutMapping("/updateFranchiseList/{id}")
+    public Franchise updateFullMovieInFranchise(@PathVariable int id, @RequestBody List<Integer> movieIds){
+        return service.fullUpdateMovieFranchiseList(id,movieIds);
+    }
+
+    @PatchMapping("/updateFranchiseList/{id}")
+    public Franchise updatePartialMovieInFranchise(@PathVariable int id, @RequestBody List<Integer> movieIds){
+        return service.partialUpdateMovieFranchiseList(id,movieIds);
+    }
 
 
 }

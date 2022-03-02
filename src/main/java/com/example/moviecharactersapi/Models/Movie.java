@@ -1,5 +1,7 @@
 package com.example.moviecharactersapi.Models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +29,6 @@ public class Movie {
     private String pictureUrl;
     private String trailerUrl;
 
-
     @JsonGetter("movieCharacterList")
     public List<String> getCharactersAsURI() {
         return movieCharacterList.stream()
@@ -37,6 +38,7 @@ public class Movie {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_list", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "character_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<MovieCharacter> movieCharacterList;
 
 
