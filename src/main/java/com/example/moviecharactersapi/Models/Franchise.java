@@ -1,9 +1,11 @@
 package com.example.moviecharactersapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Franchise {
@@ -15,8 +17,13 @@ public class Franchise {
     private String name;
     private String description;
 
+    @JsonGetter("movies")
+    public List<String> moviesAsURIInFranchise(){
+        return movies.stream()
+                .map(movie -> String.format("/movie/%d", movie.getId()))
+                .collect(Collectors.toList());
+    }
     @OneToMany(mappedBy = "franchise")
-    @JsonIgnore
     private List<Movie> movies;
 
     public Franchise() {
