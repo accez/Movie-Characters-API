@@ -24,8 +24,11 @@ public class MovieCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 50)
     private String fullName;
+    @Column(length = 50)
     private String alias;
+    @Column(length = 25)
     private String gender;
     private String picture;
 

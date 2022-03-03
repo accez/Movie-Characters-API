@@ -20,6 +20,7 @@ public class Franchise {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 100)
     private String name;
     private String description;
 

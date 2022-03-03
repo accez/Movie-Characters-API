@@ -22,9 +22,12 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 100)
     private String title;
+    @Column(length = 100)
     private String genre;
     private int releaseYear;
+    @Column(length = 45)
     private String director;
     private String pictureUrl;
     private String trailerUrl;
