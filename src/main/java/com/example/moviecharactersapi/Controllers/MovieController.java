@@ -29,9 +29,11 @@ public class MovieController {
     @Operation(summary = "Create a movie")
     @PostMapping("/")
     public Movie addMovie(@RequestBody Movie movie) {
-        movie = repository.save(movie);
-        return movie;
+        if(movie.getMovieCharacterList() == null)
+            movie.setMovieCharacterList(new ArrayList<>());
+        return repository.save(movie);
     }
+
     // READ
     @Operation(summary = "Get all movies")
     @GetMapping("/")

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class FranchiseController {
     @Operation(summary = "Create a franchise")
     @PostMapping("/")
     public Franchise addFranchise(@RequestBody Franchise franchise) {
+        if(franchise.getMovies() == null)
+            franchise.setMovies(new ArrayList<>());
         return repository.save(franchise);
     }
 

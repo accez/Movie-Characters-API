@@ -6,6 +6,7 @@ import com.example.moviecharactersapi.Repositorys.MovieCharacterRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,8 @@ public class MovieCharacterController {
     @Operation(summary = "Create a actor or actress")
     @PostMapping("/")
     public MovieCharacter createCharacter(@RequestBody MovieCharacter character) {
+        if(character.getMovieList() == null)
+            character.setMovieList(new ArrayList<>());
         return repository.save(character);
     }
 
