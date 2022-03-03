@@ -13,14 +13,19 @@ import java.util.*;
 public class MovieService {
 
 
-    private MovieRepository repository;
-    private MovieCharacterRepository characterRepository;
+    private final MovieRepository repository;
+    private final MovieCharacterRepository characterRepository;
 
     public MovieService(MovieRepository repository, MovieCharacterRepository characterRepository) {
         this.repository = repository;
         this.characterRepository = characterRepository;
     }
 
+    /**
+     * Database method to partially update a movie object, any property being null will not be updated
+     * @param movie object with the new property values to store, must include an id
+     * @return the new updated movie object
+     */
     public Movie partialUpdateMovie(Movie movie) {
         Movie movieFromDB = repository.getById(movie.getId());
 
@@ -48,6 +53,13 @@ public class MovieService {
         return repository.save(movieFromDB);
     }
 
+    /**
+     * Database method to fully update a movie character list, will add all found characters that's in charId list.
+     * Any current list WILL BE overruled by the new list.
+     * @param movieId of the movie to update
+     * @param charIds list of integers of characterIds to add to movie
+     * @return new updated movie object
+     */
     public Movie fullUpdateCharacterList(int movieId, Collection<Integer> charIds){
         Movie movie = repository.getById(movieId);
         List<MovieCharacter> characterCollection = new ArrayList<>();
@@ -63,6 +75,13 @@ public class MovieService {
         return repository.save(movie);
     }
 
+    /**
+     * Database method to add characters to a movie, will add all characters in charIds list.
+     * Current characters will NOT bew overruled.
+     * @param movieId of movie to update
+     * @param charIds list of integers of characterdIds to add to movie
+     * @return new updated movie object.
+     */
     public Movie partialUpdateCharacterList(int movieId, Collection<Integer> charIds) {
         Movie movie = repository.getById(movieId);
         for (Integer charId : charIds) {

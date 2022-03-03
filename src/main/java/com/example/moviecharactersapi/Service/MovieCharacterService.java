@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieCharacterService {
 
-    private MovieCharacterRepository repository;
+    private final MovieCharacterRepository repository;
 
     public MovieCharacterService(MovieCharacterRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Method to partialy update a character object, any property being null will not be updated
+     * @param character object with the new values to store in database, must include an id
+     * @return the new updated character object
+     */
     public MovieCharacter partialUpdateMovieCharacter(MovieCharacter character){
 
         MovieCharacter characterFromDB = repository.getById(character.getId());

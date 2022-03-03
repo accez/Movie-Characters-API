@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @Service
 public class FranchiseService {
 
-    private FranchiseRepository repository;
-    private MovieRepository movieRepository;
-    private MovieCharacterRepository characterRepository;
+    private final FranchiseRepository repository;
+    private final MovieRepository movieRepository;
+    private final MovieCharacterRepository characterRepository;
 
     public FranchiseService(FranchiseRepository repository, MovieRepository movieRepository, MovieCharacterRepository characterRepository) {
         this.repository = repository;
@@ -28,6 +28,11 @@ public class FranchiseService {
         this.characterRepository = characterRepository;
     }
 
+    /**
+     * Database method to update partial parts of a franchise, all propertyes set to null will not be updated and be kept as in database.
+     * @param franchise object with new values to be updated. Must include an id.
+     * @return return the new saved object.
+     */
     public Franchise partialUpdate(Franchise franchise){
 
         Franchise franchiseFromDB = repository.getById(franchise.getId());
@@ -42,6 +47,12 @@ public class FranchiseService {
         return repository.save(franchiseFromDB);
     }
 
+    /**
+     * Database method to fully updated a franchise character list, with help of movieId list
+     * @param franchiseId id of franchise to update
+     * @param movieIds list with all the movieIds to add to franchise
+     * @return the franchise object (but without the movie list its in the movie object)
+     */
     public Franchise fullUpdateMovieFranchiseList(int franchiseId, List<Integer> movieIds){
         Franchise franchise = repository.getById(franchiseId);
         List<Movie> currentMovieList = movieRepository.findAllByFranchise(franchise);
@@ -66,6 +77,12 @@ public class FranchiseService {
         return repository.save(franchise);
     }
 
+    /**
+     * Database method to partial update a franchise movie list, all the movieIds in list till be added but noting gets removed
+     * @param franchiseId id of franchise to update
+     * @param movieIds list with all the moveIds to add to franchise
+     * @return the franchise object (but without the movie list its in the movie object)
+     */
     public Franchise partialUpdateMovieFranchiseList(int franchiseId, List<Integer> movieIds){
         Franchise franchise = repository.getById(franchiseId);
 
@@ -83,6 +100,10 @@ public class FranchiseService {
         return repository.save(franchise);
     }
 
+    /**
+     * Databse method to remove a franchise from databse, will set all the movies in franhise to first have null franchise,
+     * @param id of the franchise to remove
+     */
     public void removeFranchise(int id){
         Franchise franchise = repository.getById(id);
         List<Movie> movieList = movieRepository.findAllByFranchise(franchise);
@@ -92,12 +113,14 @@ public class FranchiseService {
 
     }
 
+    /**
+     * Databse method to get all the characters who have played in the franchise
+     * @param id of the franchise to get characters from
+     * @return list of characters
+     */
     public List<MovieCharacter> getAllMovieCharactersInFranchise(int id){
-
         Franchise franchise = repository.getById(id);
-
         List<Movie> movieList = movieRepository.findAllByFranchise(franchise);
-
         List<MovieCharacter> returnList = new ArrayList<>();
 
         for (Movie movie: movieList) {
