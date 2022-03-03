@@ -82,12 +82,4 @@ public class MovieController {
         return service.partialUpdateCharacterList(id,charIds);
     }
 
-
-
-    @GetMapping("/test")
-    public Collection<Integer> test(){
-        return new ArrayList<>(List.of(1, 2, 3, 4, 5));
-    }
-
-
 }
