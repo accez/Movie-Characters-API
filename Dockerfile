@@ -7,7 +7,7 @@ ENV PORT 8080
 FROM openjdk:17 as runtime
 
 WORKDIR /app
-COPY --from=maven ./target/Movie-Characters-API-0.0.1-SNAPSHOT.jar .
-ENTRYPOINT ["java", "-jar", "Movie-Characters-API-0.0.1-SNAPSHOT.jar"]
+COPY --from=maven /app/target/*.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
 EXPOSE 8080
 EXPOSE 5432
