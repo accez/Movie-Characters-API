@@ -14,19 +14,12 @@ be in a franchise but a franchise can have many movies.
 ## Getting Started
 
 ### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
-
 * JDK (to run project in IDE)
 * Java IDE (IntelliJ of any other modern Java IDE)
 * Postman
 * Postgres running locally on port 5432
 
 ### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
 
 * Clone project
 * Open project in IDE and build
@@ -44,13 +37,8 @@ or
 * Hit execute and add property values to test with
 
 ### Executing program
-
-* How to run the program
-* Step-by-step bullets
-
-```
-code blocks for commands
-```
+- In ide run project
+- Navigate to http://localhost:5000/home
 
 #### Heruko
 
