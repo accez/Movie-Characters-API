@@ -1,4 +1,4 @@
-FROM maven:jdk17 AS maven
+FROM maven:jdk17-alpine AS maven
 WORKDIR /app
 COPY . .
 RUN mvn clean install -DskipTest
