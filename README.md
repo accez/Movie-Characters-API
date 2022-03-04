@@ -4,12 +4,9 @@ Third Java assignment for Noroff winter 2022. Task is to create a Java Spring ap
 to handel and look through a movie database.
 
 ## Description
-
-An in-depth paragraph about your project and overview of use.
-
 The task is to create a RESTfull api using Java Spring to handle and use a postgres database seeded with movie data.
 
-The database stores three different object that are movie, character and franchise.
+The database stores three different object movie, character and franchise.
 
 Relations between this are that a movie can have many characters and a character can be in many movies, and a movie can
 be in a franchise but a franchise can have many movies.
@@ -37,16 +34,12 @@ be in a franchise but a franchise can have many movies.
 API Test
 
 * Open Postman
-* Under Collections import and enter
-
-[//]: # (TODO add link to Postman collection)
+* Under Collections import and enter https://www.getpostman.com/collections/f672b5e16f7035390446
 * Double click folder and choose what base url to use
 * Run Collection by hitting Run in folder or hit ... at end of Collection name and hit Run collection
 
 or
-* Navigate to 
-
-[//]: # (TODO add link to swagger / open-api)
+* Navigate to [Swagger-UI link](https://movie-characters-java-noroff.herokuapp.com/swagger-ui/index.html)
 * Right click method to test
 * Hit execute and add property values to test with
 
@@ -61,17 +54,8 @@ code blocks for commands
 
 #### Heruko
 
-To run application from Heroku to
-
-[//]: # (TODO  add url to heruko app)
-
-## Help
-
-Any advise for common problems or issues.
-
-```
-command to run if program contains helper info
-```
+To run application from Heroku:
+[Heroku base url](https://movie-characters-java-noroff.herokuapp.com)
 
 ## Authors
 
